@@ -1,0 +1,123 @@
+Sure! Here's the updated Epic with story points assigned to each story and subtask:
+
+### Jira Epic: New Lab Deployment
+
+#### Summary:
+Deployment of a new lab with spine-leaf network architecture, full VMware VCF suite, 4 blades for virtualization, Pure Storage, and flash hardware.
+
+#### Description:
+This Epic covers the entire process of planning, designing, and deploying a new lab environment with a high-availability and scalable architecture. The lab will include a spine-leaf network topology, VMware VCF suite, blade servers for virtualization, Pure Storage, and flash hardware.
+
+### Stories and Subtasks with Story Points
+
+#### Story 1: Planning the New Lab Deployment (8 Story Points)
+**Description:** Plan the entire process of deploying the new lab environment, including requirements gathering, resource allocation, and timeline setting.
+
+##### Subtasks:
+1. **Gather Requirements (2 Story Points):**
+   - Identify and document all hardware and software requirements.
+   - Confirm network, compute, and storage specifications.
+2. **Resource Allocation (3 Story Points):**
+   - Allocate necessary resources (personnel, budget, hardware).
+   - Schedule planning meetings with relevant stakeholders.
+3. **Set Timeline (3 Story Points):**
+   - Create a detailed timeline with milestones.
+   - Establish deadlines for each phase of the project.
+
+#### Story 2: Designing the Lab Architecture (13 Story Points)
+**Description:** Design the network architecture and overall layout of the new lab environment.
+
+##### Subtasks:
+1. **Network Design (4 Story Points):**
+   - Design the spine-leaf network topology.
+   - Specify ports and connections for all network devices.
+2. **Compute Design (3 Story Points):**
+   - Plan the configuration of the blade servers for virtualization.
+   - Define the integration of VMware VCF suite.
+3. **Storage Design (3 Story Points):**
+   - Design the integration of Pure Storage and flash hardware.
+   - Ensure high availability and redundancy for storage solutions.
+4. **Create Diagrams (3 Story Points):**
+   - Develop detailed network and storage diagrams.
+   - Document all design decisions and configurations.
+
+#### Story 3: Procuring Hardware and Software (5 Story Points)
+**Description:** Procure all necessary hardware and software for the lab deployment.
+
+##### Subtasks:
+1. **List Hardware and Software (2 Story Points):**
+   - Create a detailed list of required hardware and software.
+2. **Vendor Selection (2 Story Points):**
+   - Select vendors for purchasing equipment.
+   - Obtain quotes and finalize procurement.
+3. **Order and Receive Equipment (1 Story Point):**
+   - Place orders for all hardware and software.
+   - Track shipments and confirm receipt.
+
+#### Story 4: Setting Up the Network Infrastructure (13 Story Points)
+**Description:** Deploy and configure the spine-leaf network architecture.
+
+##### Subtasks:
+1. **Install Spine Switches (4 Story Points):**
+   - Physically install spine switches in the rack.
+   - Configure spine switches with appropriate routing protocols.
+2. **Install Leaf Switches (4 Story Points):**
+   - Physically install leaf switches in the rack.
+   - Configure VLANs and port channels on leaf switches.
+3. **Connect Devices (5 Story Points):**
+   - Connect blade servers, Pure Storage, and flash hardware to leaf switches.
+   - Verify connectivity and redundancy.
+
+#### Story 5: Deploying VMware VCF Suite (13 Story Points)
+**Description:** Install and configure VMware VCF suite on the blade servers.
+
+##### Subtasks:
+1. **Install ESXi on Blades (4 Story Points):**
+   - Install VMware ESXi on each blade server.
+   - Configure network settings for ESXi hosts.
+2. **Deploy VCF Management Domain (5 Story Points):**
+   - Install and configure VCF management components.
+   - Set up vCenter and NSX-T.
+3. **Create Workload Domains (4 Story Points):**
+   - Configure workload domains for different purposes.
+   - Integrate storage and network resources.
+
+#### Story 6: Integrating Storage Solutions (8 Story Points)
+**Description:** Connect and configure Pure Storage and flash hardware.
+
+##### Subtasks:
+1. **Connect Storage to Network (3 Story Points):**
+   - Physically connect Pure Storage and flash hardware to leaf switches.
+2. **Configure Multipathing (3 Story Points):**
+   - Set up multipathing for high availability.
+   - Verify storage accessibility from ESXi hosts.
+3. **Create Datastores (2 Story Points):**
+   - Create and configure datastores in vSphere.
+   - Allocate storage to workload domains.
+
+#### Story 7: Testing and Validation (8 Story Points)
+**Description:** Test and validate the entire lab environment to ensure proper functionality.
+
+##### Subtasks:
+1. **Network Testing (3 Story Points):**
+   - Test connectivity and redundancy of the network.
+   - Perform load testing on the spine-leaf architecture.
+2. **Compute Testing (3 Story Points):**
+   - Validate ESXi host configurations.
+   - Test VCF management and workload domains.
+3. **Storage Testing (2 Story Points):**
+   - Verify storage connectivity and performance.
+   - Test data integrity and failover scenarios.
+
+#### Story 8: Documentation and Handover (5 Story Points)
+**Description:** Document the entire setup and handover to the operations team.
+
+##### Subtasks:
+1. **Create Documentation (3 Story Points):**
+   - Document all configurations, designs, and test results.
+   - Develop a detailed user guide for the lab environment.
+2. **Conduct Handover (2 Story Points):**
+   - Train the operations team on managing and using the lab.
+   - Ensure all documentation is accessible and understood.
+
+This structure, with story points assigned, ensures that all phases of the project are meticulously planned, executed, and documented, providing a comprehensive and manageable approach to deploying the new lab environment.
