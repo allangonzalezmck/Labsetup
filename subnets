@@ -1,0 +1,103 @@
+### Revised Subnet Allocation with Separate /27 Subnets for AVI LoadBalancers VIP Deployments and NSX-T Workload
+
+To incorporate the changes, we will split the AVI LoadBalancers VIP Deployments into three separate /27 subnets and also split the NSX-T Workload subnet into three /27 subnets named Workload 1, Workload 2, and Workload 3.
+
+### Revised Subnet Allocation
+
+| Subnet Name                      | VLAN ID | Subnet              | IPs  | Usable IPs | Purpose                                     |
+|----------------------------------|---------|---------------------|------|------------|---------------------------------------------|
+| Management                       | 1611    | 10.21.0.0/24        | 256  | 254        | Network for managing network devices, servers, and infrastructure components |
+| vMotion                          | 1612    | 10.21.1.0/25        | 128  | 126        | Network dedicated to VMware vMotion traffic  |
+| vSAN                             | 1613    | 10.21.1.128/25      | 128  | 126        | Network for VMware vSAN storage traffic      |
+| Host TEPs                        | 1614    | 10.21.2.0/27        | 32   | 30         | Network for Tunnel Endpoints (TEPs) for NSX-T hosts |
+| Edge Uplink 1                    | 2711    | 10.21.2.64/27       | 32   | 30         | Network for NSX-T Edge uplink 1              |
+| Edge Uplink 2                    | 2712    | 10.21.2.96/27       | 32   | 30         | Network for NSX-T Edge uplink 2              |
+| Edge Overlay                     | 1615    | 10.21.2.128/26      | 64   | 62         | Network for NSX-T Edge transport nodes       |
+| Infra NSX Cross-Federation       | 1616    | 10.21.3.0/27        | 32   | 30         | Infrastructure network for NSX cross-federation |
+| TEP Workload Domain              | 1617    | 10.21.3.32/27       | 32   | 30         | Network for Tunnel Endpoints (TEPs) in the workload domain |
+| Edge Overlay Workload Domain     | 1618    | 10.21.3.64/27       | 32   | 30         | Network for Edge overlay in the workload domain |
+| Edge Uplink Workload 1           | 2713    | 10.21.3.96/27       | 32   | 30         | Network for NSX-T Edge uplink 1 in workload domain |
+| Edge Uplink Workload 2           | 2714    | 10.21.3.128/27      | 32   | 30         | Network for NSX-T Edge uplink 2 in workload domain |
+| Workload NSX Edge Overlay        | 1619    | 10.21.3.160/27      | 32   | 30         | Network for NSX Edge overlay in workload domain |
+| Infra Shared Services            | 1620    | 10.21.3.192/27      | 32   | 30         | Network for shared services like DNS, DHCP, NTP, etc |
+| VCF Infra iSCSI 1                | 1621    | 10.21.3.224/27      | 32   | 30         | Network for VCF infrastructure iSCSI 1       |
+| VCF Infra iSCSI 2                | 1622    | 10.21.4.0/27        | 32   | 30         | Network for VCF infrastructure iSCSI 2       |
+| Underlying Routing Loopback IP   | N/A     | 10.21.4.32/27       | 32   | 30         | Loopback IPs for underlying routing          |
+| Underlay VTEP Loopback IP Range  | N/A     | 10.21.4.64/27       | 32   | 30         | Loopback IPs for VTEPs in the underlay network |
+| Underlay RP Loopback IP Range    | N/A     | 10.21.4.96/27       | 32   | 30         | Loopback IPs for RP in the underlay network  |
+| Underlay Subnet IP Range         | N/A     | 10.21.4.128/26      | 64   | 62         | IP range for underlay network subnets        |
+| VRF Lite Subnet IP Range         | N/A     | 10.21.4.192/26      | 64   | 62         | Subnet range for VRF Lite instances          |
+| OOB Network                      | 1623    | 10.21.5.0/27        | 32   | 30         | Out-of-band management network               |
+| AVI LoadBalancers Management     | 1624    | 10.21.5.32/27       | 32   | 30         | Management network for AVI LoadBalancers     |
+| AVI LoadBalancers VIP Deployments 1 | 1625  | 10.21.5.64/27       | 32   | 30         | VIP deployments for AVI LoadBalancers        |
+| AVI LoadBalancers VIP Deployments 2 | 1626  | 10.21.5.96/27       | 32   | 30         | VIP deployments for AVI LoadBalancers        |
+| AVI LoadBalancers VIP Deployments 3 | 1627  | 10.21.5.128/27      | 32   | 30         | VIP deployments for AVI LoadBalancers        |
+| NSX-T Workload 1                 | 1628    | 10.21.5.160/27      | 32   | 30         | Network for NSX-T workload domains           |
+| NSX-T Workload 2                 | 1629    | 10.21.5.192/27      | 32   | 30         | Network for NSX-T workload domains           |
+| NSX-T Workload 3                 | 1630    | 10.21.5.224/27      | 32   | 30         | Network for NSX-T workload domains           |
+| Service Engines Data Network     | 1631    | 10.21.6.0/27        | 32   | 30         | Data network for Service Engines (SEs)       |
+
+### Available Subnets and IPs
+
+**Remaining IPs:**
+- **First Available Subnet:** 10.21.6.32/27
+- **Last Available Subnet:** 10.21.7.255
+
+This revised allocation includes separate /27 subnets for the AVI LoadBalancers VIP deployments and splits the NSX-T workload subnet into three /27 subnets, ensuring efficient use of the 10.21.0.0/21 range while providing sufficient IP addresses for growth and scalability.
+
+
+
+### Total Number of Available IPs
+
+To determine the total number of available IPs after the revised allocation, we need to sum up the total IPs and subtract the allocated IPs.
+
+### Allocated Subnets
+
+Here are the allocated subnets and their IP addresses:
+
+1. Management: 10.21.0.0/24 (256 IPs)
+2. vMotion: 10.21.1.0/25 (128 IPs)
+3. vSAN: 10.21.1.128/25 (128 IPs)
+4. Host TEPs: 10.21.2.0/27 (32 IPs)
+5. Edge Uplink 1: 10.21.2.64/27 (32 IPs)
+6. Edge Uplink 2: 10.21.2.96/27 (32 IPs)
+7. Edge Overlay: 10.21.2.128/26 (64 IPs)
+8. Infra NSX Cross-Federation: 10.21.3.0/27 (32 IPs)
+9. TEP Workload Domain: 10.21.3.32/27 (32 IPs)
+10. Edge Overlay Workload Domain: 10.21.3.64/27 (32 IPs)
+11. Edge Uplink Workload 1: 10.21.3.96/27 (32 IPs)
+12. Edge Uplink Workload 2: 10.21.3.128/27 (32 IPs)
+13. Workload NSX Edge Overlay: 10.21.3.160/27 (32 IPs)
+14. Infra Shared Services: 10.21.3.192/27 (32 IPs)
+15. VCF Infra iSCSI 1: 10.21.3.224/27 (32 IPs)
+16. VCF Infra iSCSI 2: 10.21.4.0/27 (32 IPs)
+17. Underlying Routing Loopback IP: 10.21.4.32/27 (32 IPs)
+18. Underlay VTEP Loopback IP Range: 10.21.4.64/27 (32 IPs)
+19. Underlay RP Loopback IP Range: 10.21.4.96/27 (32 IPs)
+20. Underlay Subnet IP Range: 10.21.4.128/26 (64 IPs)
+21. VRF Lite Subnet IP Range: 10.21.4.192/26 (64 IPs)
+22. OOB Network: 10.21.5.0/27 (32 IPs)
+23. AVI LoadBalancers Management: 10.21.5.32/27 (32 IPs)
+24. AVI LoadBalancers VIP Deployments 1: 10.21.5.64/27 (32 IPs)
+25. AVI LoadBalancers VIP Deployments 2: 10.21.5.96/27 (32 IPs)
+26. AVI LoadBalancers VIP Deployments 3: 10.21.5.128/27 (32 IPs)
+27. NSX-T Workload 1: 10.21.5.160/27 (32 IPs)
+28. NSX-T Workload 2: 10.21.5.192/27 (32 IPs)
+29. NSX-T Workload 3: 10.21.5.224/27 (32 IPs)
+30. Service Engines Data Network: 10.21.6.0/27 (32 IPs)
+
+### Total IPs Allocated
+- /24: 1 subnet * 256 IPs = 256 IPs
+- /25: 2 subnets * 128 IPs = 256 IPs
+- /26: 3 subnets * 64 IPs = 192 IPs
+- /27: 24 subnets * 32 IPs = 768 IPs
+
+Total Allocated IPs = 256 + 256 + 192 + 768 = 1472 IPs
+
+### Total IPs in 10.21.0.0/21 Subnet
+- /21: 1 subnet * 2048 IPs = 2048 IPs
+
+### Remaining IPs
+- Total IPs - Allocated IPs = 2048 - 1472 = 576 IPs
+
+Therefore, there are **576 available IPs** remaining within the 10.21.0.0/21 subnet after the revised allocation.
